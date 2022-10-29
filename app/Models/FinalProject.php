@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class FinalProject extends Model
+{
+    use HasFactory;
+
+    protected $table = 'final_projects';
+
+    protected $fillable = [
+        'student_id',
+        'first_mentor',
+        'second_mentor',
+        'title',
+        'lab_id',
+        'proposal_date',
+        'proposal_revision_date',
+        'final_project_date',
+        'final_project_status'
+    ];
+
+    protected $primaryKey = 'id';
+
+    public function student() {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function stMentor() {
+        return $this->belongsTo(Mentor::class, 'first_mentor', 'id');
+    }
+
+    public function ndMentor() {
+        return $this->belongsTo(Mentor::class, 'second_mentor', 'id');
+    }
+
+    public function lab() {
+        return $this->belongsTo(Lab::class);
+    }
+}
