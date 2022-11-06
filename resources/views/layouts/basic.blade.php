@@ -12,9 +12,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     {{-- Style --}}
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('style.css') }}">
 
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
@@ -22,7 +24,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -33,7 +35,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                    </ul>
 
+                    {{-- Center Of Navbar --}}
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item m-1">
+                            <a class="nav-link css-rounded-border" href="{{ route('FinalProject.index') }}">Final Project</a>
+                        </li>
+                        <li class="nav-item m-1">
+                            <a class="nav-link css-rounded-border" href="#">Student</a>
+                        </li>
+                        <li class="nav-item m-1">
+                            <a class="nav-link css-rounded-border" href="#">Mentor</a>
+                        </li>
+                        <li class="nav-item m-1">
+                            <a class="nav-link css-rounded-border" href="#">Lab</a>
+                        </li>
+                        @guest
+                            @if (Route::has('register'))
+                                <li class="nav-item m-1">
+                                    <a class="nav-link css-rounded-border" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -42,13 +66,9 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link css-rounded-border" href="{{ route('login') }}">
+                                        <i class="bi bi-person-fill"></i>{{ __('Login') }}
+                                    </a>
                                 </li>
                             @endif
                         @else
@@ -75,9 +95,9 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="container py-4">
             @yield('content')
-        </main>
+        </div>
     </div>
 
     {{-- Scripts --}}

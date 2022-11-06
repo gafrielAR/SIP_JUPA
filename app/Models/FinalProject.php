@@ -30,11 +30,11 @@ class FinalProject extends Model
     }
 
     public function stMentor() {
-        return $this->belongsTo(Mentor::class, 'first_mentor', 'id');
+        return $this->belongsTo(Mentor::class, 'first_mentor');
     }
 
     public function ndMentor() {
-        return $this->belongsTo(Mentor::class, 'second_mentor', 'id');
+        return $this->belongsTo(Mentor::class, 'second_mentor');
     }
 
     public function lab() {
