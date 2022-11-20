@@ -23,6 +23,12 @@ class FinalProject extends Model
         'final_project_status'
     ];
 
+    protected $dates = [
+        'proposal_date',
+        'proposal_revision_date',
+        'final_project_date'
+    ];
+
     protected $primaryKey = 'id';
 
     public function student() {
@@ -30,11 +36,11 @@ class FinalProject extends Model
     }
 
     public function stMentor() {
-        return $this->belongsTo(Mentor::class, 'first_mentor');
+        return $this->belongsTo(Lecturer::class, 'first_mentor');
     }
 
     public function ndMentor() {
-        return $this->belongsTo(Mentor::class, 'second_mentor');
+        return $this->belongsTo(Lecturer::class, 'second_mentor');
     }
 
     public function lab() {

@@ -40,16 +40,16 @@
                     {{-- Center Of Navbar --}}
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item m-1">
-                            {{-- <a class="nav-link css-rounded-border" href="{{ route('FinalProject.index') }}">Final Project</a> --}}
+                            <a class="nav-link css-rounded-border" href="{{ route('finalProject') }}">Final Project</a>
                         </li>
                         <li class="nav-item m-1">
-                            <a class="nav-link css-rounded-border" href="#">Student</a>
+                            <a class="nav-link css-rounded-border" href="{{ route('student') }}">Student</a>
                         </li>
                         <li class="nav-item m-1">
-                            <a class="nav-link css-rounded-border" href="#">Mentor</a>
+                            <a class="nav-link css-rounded-border" href="{{ route('lecturer') }}">Mentor</a>
                         </li>
                         <li class="nav-item m-1">
-                            <a class="nav-link css-rounded-border" href="#">Lab</a>
+                            <a class="nav-link css-rounded-border" href="{{ route('lab') }}">Lab</a>
                         </li>
                         @guest
                             @if (Route::has('register'))

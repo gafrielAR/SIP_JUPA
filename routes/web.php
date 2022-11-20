@@ -20,15 +20,21 @@ use App\Models\FinalProject;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/final-projects', [HomeController::class, 'finalProject'])->name('finalProject');
+Route::get('/student', [HomeController::class, 'student'])->name('student');
+Route::get('/lecturer', [HomeController::class, 'lecturer'])->name('lecturer');
+Route::get('/lab', [HomeController::class, 'lab'])->name('lab');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [AdminController::class, 'index'])->name('home');
 
-Route::controller(FinalProjectController::class)->prefix('final-project')->name('FinalProject.')->group(function () {
+Route::prefix('final-project')->name('FinalProject.')->controller(FinalProjectController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/show/{data}', 'show')->name('show');
     Route::get('/create', 'create')->name('create');

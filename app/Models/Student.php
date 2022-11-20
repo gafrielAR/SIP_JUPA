@@ -13,12 +13,43 @@ class Student extends Model
 
     protected $fillable = [
         'nrp',
-        'name'
+        'name',
+        'study_program_id',
+        'semester',
+        'parallel',
+        'guardian_lecturer_id',
+        'status',
+        'birth_date',
+        'birht_place',
+        'gender',
+        'citizenship',
+        'religion_id',
+        'blood_type',
+        'address',
+        'phone',
+        'graduate_date',
+        'acceptance_path_id'
     ];
 
     protected $primaryKey = 'id';
 
-    public function FinalProjects() {
+    public function study_program() {
+        return $this->hasOne(StudyProgram::class);
+    }
+
+    public function guardian_lecturer() {
+        return $this->hasOne(Lecturer::class, 'guardian_lecturer_id');
+    }
+
+    public function relogion() {
+        return $this->hasOne(Religion::class);
+    }
+
+    public function acceptance_path() {
+        return $this->hasOne(AcceptancePath::class);
+    }
+
+    public function final_projects() {
         return $this->hasMany(FinalProject::class);
     }
 }

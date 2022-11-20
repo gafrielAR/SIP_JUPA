@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lab extends Model
+class AcceptancePath extends Model
 {
     use HasFactory;
 
-    protected $table = 'labs';
+    protected $table = 'acceptance_paths';
 
     protected $fillable = [
-        'name',
-        'code'
+        'name'
     ];
 
     protected $primaryKey = 'id';
 
-    public function final_projects() {
-        return $this->hasMany(FinalProject::class);
+    public function students() {
+        return $this->hasMany(Student::class);
     }
 }

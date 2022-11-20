@@ -35,7 +35,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $data->student->name }}</td>
                                     <td>{{ $data->stMentor->name }}</td>
-                                    <td>{{ $data->ndMentor->name }}</td>
+                                    <td>{{ $data->ndMentor == null ? '-' : $data->ndMentor->name }}</td>
                                     <td>{{ $data->title }}</td>
                                     <td>{{ $data->final_project_status }}</td>
                                     <td>

@@ -18,6 +18,7 @@ class LabFactory extends Factory
     {
         return [
             'name' => 'LAB ' . $this->faker->jobTitle(),
+            'code' => $this->faker->lexify('??') . $this->faker->numerify('###')
         ];
     }
 }

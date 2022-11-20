@@ -3,28 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+
+// Models
 use App\Models\FinalProject;
+use App\Models\Student;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('auth');
+    public function index() {
+        return view('guest.index');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index() {
-        $data = FinalProject::all();
-        $no = 1;
+    public function finalProject() {
+        $finalProject = FinalProject::select(DB::raw('count(*) as `count`'), DB::raw("DATE_FORMAT(proposal_date, '%M') new_date"),  DB::raw('MONTH(proposal_date) month'))->groupby('month')->get();
 
-        return view('home', ['datas' => $data, 'no' => $no]);
+        $categories = [];
+        $data       = [];
+
+        foreach ($finalProject as $fp) {
+            $categories[]   = $fp->new_date;
+            $data[]         = $fp->count;
+        }
+
+        return view('Guest.Final-Project.index', ['categories' => $categories, 'data' => $data]);
+    }
+
+    public function student() {
+        return view('Guest.Student.index');
+    }
+
+    public function lecturer() {
+        return view('Guest.Lecturer.index');
+    }
+
+    public function lab() {
+        return view('Guest.Lab.index');
     }
 }

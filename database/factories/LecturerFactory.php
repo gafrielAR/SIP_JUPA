@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lecturer>
  */
-class StudentFactory extends Factory
+class LecturerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,13 +16,15 @@ class StudentFactory extends Factory
      */
     public function definition()
     {
+        $no = 0;
+
         return [
-            'nrp'                   => $this->faker->numberBetween($min = 1000000000, $max = 9999999999),
             'name'                  => $this->faker->name(),
+            'nip'                   => $this->faker->date($format = 'YmdYmd', $max = 'now')+$no++,
+            'position'              => null,
+            'years_of_service'      => $this->faker->numberBetween($min = 1, $max = 99),
+            'months_of_service'     => $this->faker->month(),
             'study_program_id'      => $this->faker->numberBetween($min = 1, $max = 16),
-            'semester'              => $this->faker->numberBetween($min = 1, $max = 8),
-            'parallel'              => $this->faker->randomElement($array = array ('A','B')),
-            'guardian_lecturer_id'  => $this->faker->numberBetween($min = 1, $max = 10),
             'status'                => $this->faker->randomElement($array = array ('active','inactive')),
             'birth_date'            => $this->faker->date(),
             'birth_place'           => $this->faker->city(),
@@ -32,8 +34,9 @@ class StudentFactory extends Factory
             'blood_type'            => $this->faker->randomElement($array = array ('A','O', 'B', 'AB')),
             'address'               => $this->faker->address(),
             'phone'                 => $this->faker->phoneNumber(),
-            'graduate_date'         => null,
-            'acceptance_path_id'    => $this->faker->numberBetween($min = 1, $max = 6),
+            'direct_supervisor_id'  => null,
+            'nidn_nupn'             => null,
+            'karis_karsus'          => null,
         ];
     }
 }

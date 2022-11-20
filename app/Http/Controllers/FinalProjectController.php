@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 // model
 use App\Models\FinalProject;
 use App\Models\Student;
-use App\Models\Mentor;
+use App\Models\Lecturer;
 use App\Models\Lab;
 
 class FinalProjectController extends Controller
@@ -20,8 +20,6 @@ class FinalProjectController extends Controller
         $data = FinalProject::all();
         $no = 1;
 
-        // dd($data);
-
         return view('Admin.Final-Project.index', ['datas' => $data, 'no' => $no]);
     }
 
@@ -30,18 +28,20 @@ class FinalProjectController extends Controller
     }
 
     public function create() {
-        $student    = Student::all();
-        $mentor     = Mentor::all();
-        $lab        = Lab::all();
+        $collection = [
+            'student'    => Student::all(),
+            'mentor'     => Lecturer::all(),
+            'lab'        => Lab::all()
+        ];
 
-        return view('Admin.Final-Project.create', ['students' => $student, 'mentors' => $mentor, 'labs' => $lab]);
+        return view('Admin.Final-Project.create', $collection);
     }
 
     public function store(Request $request) {
         $this->validate($request, [
     		'student_id'                => 'required|numeric',
             'first_mentor'              => 'required|numeric',
-            'second_mentor'             => 'required|numeric',
+            'second_mentor'             => 'nullable|numeric',
             'title'                     => 'required|min:10',
             'lab_id'                    => 'required|numeric',
             'proposal_date'             => 'required|date',
@@ -59,19 +59,19 @@ class FinalProjectController extends Controller
     public function edit(FinalProject $data) {
         $collection = [
             'student'    => Student::all(),
-            'mentor'     => Mentor::all(),
+            'mentor'     => Lecturer::all(),
             'lab'        => Lab::all(),
-            'data'       => FinalProject::findOrFail($data)
+            'data'       => $data
         ];
 
-        return view('Admin.Final-Project.update', ['collections' => $collection]);
+        return view('Admin.Final-Project.update', $collection);
     }
 
     public function update(Request $request, $data) {
         $this->validate($request, [
     		'student_id'                => 'required|numeric',
             'first_mentor'              => 'required|numeric',
-            'second_mentor'             => 'required|numeric',
+            'second_mentor'             => 'numeric',
             'title'                     => 'required|min:10',
             'lab_id'                    => 'required|numeric',
             'proposal_date'             => 'required|date',
