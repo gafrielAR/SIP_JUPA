@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 // model
 use App\Models\FinalProject;
@@ -53,7 +54,7 @@ class FinalProjectController extends Controller
         $inputs = $request->all();
         FinalProject::create($inputs);
 
-        return redirect()->route('FinalProject.index')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()->route('Admin.FinalProject.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     public function edit(FinalProject $data) {
@@ -84,13 +85,13 @@ class FinalProjectController extends Controller
         $finalproject   = FinalProject::findOrFail($data);
         $finalproject->update($inputs);
 
-        return redirect()->route('FinalProject.index')->with('success', 'Data Berhasil Diubah');
+        return redirect()->route('Admin.FinalProject.index')->with('success', 'Data Berhasil Diubah');
     }
 
     public function delete($data) {
         $finalproject   = FinalProject::findOrFail($data);
         $finalproject->delete();
 
-        return redirect()->route('FinalProject.index')->with('success', 'Data Berhasil Dihapus');
+        return redirect()->route('Admin.FinalProject.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

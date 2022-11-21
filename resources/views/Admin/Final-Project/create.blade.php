@@ -19,7 +19,7 @@
                 @endif
 
                 <div class="card-body">
-                    <form action="{{ route('FinalProject.store') }}" method="post">
+                    <form action="{{ route('Admin.FinalProject.store') }}" method="post">
                         @csrf
                         <div>
                             <div class="form-floating mb-3">

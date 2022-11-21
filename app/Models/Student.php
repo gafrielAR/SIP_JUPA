@@ -20,7 +20,8 @@ class Student extends Model
         'guardian_lecturer_id',
         'status',
         'birth_date',
-        'birht_place',
+        'birth_place',
+        'date_of_entry',
         'gender',
         'citizenship',
         'religion_id',
@@ -31,22 +32,28 @@ class Student extends Model
         'acceptance_path_id'
     ];
 
+    protected $dates = [
+        'birth_date',
+        'date_of_entry',
+        'graduate_date',
+    ];
+
     protected $primaryKey = 'id';
 
     public function study_program() {
-        return $this->hasOne(StudyProgram::class);
+        return $this->belongsTo(StudyProgram::class, 'study_program_id', 'id');
     }
 
     public function guardian_lecturer() {
-        return $this->hasOne(Lecturer::class, 'guardian_lecturer_id');
+        return $this->belongsTo(Lecturer::class, 'guardian_lecturer_id');
     }
 
-    public function relogion() {
-        return $this->hasOne(Religion::class);
+    public function religion() {
+        return $this->belongsTo(Religion::class);
     }
 
     public function acceptance_path() {
-        return $this->hasOne(AcceptancePath::class);
+        return $this->belongsTo(AcceptancePath::class, 'acceptance_path_id', 'id');
     }
 
     public function final_projects() {

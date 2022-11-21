@@ -20,7 +20,7 @@ class Lecturer extends Model
         'study_program_id',
         'status',
         'birth_date',
-        'birht_place',
+        'birth_place',
         'gender',
         'citizenship',
         'religion_id',
@@ -32,14 +32,18 @@ class Lecturer extends Model
         'karis_karsus'
     ];
 
+    protected $dates = [
+        'birth_date'
+    ];
+
     protected $primaryKey = 'id';
 
     public function study_program() {
-        return $this->hasOne(StudyProgram::class);
+        return $this->belongsTo(StudyProgram::class);
     }
 
-    public function relogion() {
-        return $this->hasOne(Religion::class);
+    public function religion() {
+        return $this->belongsTo(Religion::class);
     }
 
     public function direct_supervisor() {

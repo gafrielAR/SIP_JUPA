@@ -14,16 +14,17 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('Admin.FinalProject.create') }}" class="btn btn-primary">(+) add</a>
+                    <a href="{{ route('Admin.Student.create') }}" class="btn btn-primary">(+) add</a>
 
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>First Mentor</th>
-                                <th>Second Mentor</th>
-                                <th>Title</th>
+                                <th>NRP</th>
+                                <th>Prgram Study</th>
+                                <th>Semester</th>
+                                <th>Guardian Lecturer</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -33,14 +34,15 @@
                             @foreach ($datas as $data)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $data->student->name }}</td>
-                                    <td>{{ $data->stMentor->name }}</td>
-                                    <td>{{ $data->ndMentor == null ? '-' : $data->ndMentor->name }}</td>
-                                    <td>{{ $data->title }}</td>
-                                    <td>{{ $data->final_project_status }}</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->nrp }}</td>
+                                    <td>{{ $data->study_program->education_program }}-{{ $data->study_program->major }}</td>
+                                    <td>{{ $data->semester }}</td>
+                                    <td>{{ $data->guardian_lecturer->name }}</td>
+                                    <td>{{ $data->status }}</td>
                                     <td>
                                         <span class="badge text-bg-primary">
-                                            <a class="text-decoration-none text-light" href="{{ route('Admin.FinalProject.show', ['data' => $data]) }}">
+                                            <a class="text-decoration-none text-light" href="{{ route('Admin.Student.show', ['data' => $data]) }}">
                                                 Details
                                             </a>
                                         </span>
@@ -50,7 +52,7 @@
                                             </a>
                                         </span>
                                         <span class="badge text-bg-warning">
-                                            <a class="text-decoration-none text-light" href="{{ route('Admin.FinalProject.edit', ['data' => $data]) }}">
+                                            <a class="text-decoration-none text-light" href="{{ route('Admin.Student.edit', ['data' => $data]) }}">
                                                 Edit
                                             </a>
                                         </span>
@@ -63,7 +65,7 @@
                                             <div class="modal-body">
                                                 <p>Are you sure you want to delete this data?</p>
 
-                                                <form action="{{ route('Admin.FinalProject.delete', ['data' => $data]) }}" method="post">
+                                                <form action="{{ route('Admin.Student.delete', ['data' => $data]) }}" method="post">
                                                     @csrf
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     <input class="btn btn-danger" type="submit" value="delete">

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'inactive']);
             $table->date('birth_date');
             $table->string('birth_place');
+            $table->date('date_of_entry');
             $table->enum('gender', ['men', 'women']);
             $table->enum('citizenship', ['WNI', 'WNA']);
             $table->foreignId('religion_id')->constrained('religions')->onUpdate('cascade')->onDelete('cascade');

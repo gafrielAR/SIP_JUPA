@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    <form action="{{ route('FinalProject.update', ['data' => $data]) }}" method="POST" id="addForm">
+                    <form action="{{ route('Admin.FinalProject.update', ['data' => $data]) }}" method="POST" id="addForm">
                         @csrf
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
@@ -45,7 +45,7 @@
                                 @endif
                             </div>
                             <div class="form-floating mb-3">
-                                <select class="form-control {{ $errors->has('second_mentor') ? "is-invalid" : "" }}" aria-label="Default select example" placeholder="Sub Mentor" name="second_mentor" required>
+                                <select class="form-control {{ $errors->has('second_mentor') ? "is-invalid" : "" }}" aria-label="Default select example" placeholder="Sub Mentor" name="second_mentor">
                                     <option value="" selected disabled>-- PILIH --</option>
                                     @foreach ($mentor as $ndmentor)
                                         <option value="{{ $ndmentor->id }}" {{ $data->second_mentor === $ndmentor->id ? 'selected' : '' }}>{{ $ndmentor->name }}</option>
@@ -87,7 +87,7 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-floating mb-3">
-                                        <input type="date" class="form-control {{ $errors->has('proposal_date') ? "is-invalid" : "" }}" value="{{ $data->proposal_date }}" placeholder="Proposal Date" name="proposal_date" required>
+                                        <input type="date" class="form-control {{ $errors->has('proposal_date') ? "is-invalid" : "" }}" value="{{ $data->proposal_date->format('Y-m-d') }}" placeholder="Proposal Date" name="proposal_date" required>
                                         <label for="proposal_date">Tanggal Proposal *</label>
                                     </div>
 
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-floating mb-3">
-                                        <input type="date" class="form-control {{ $errors->has('proposal_revision_date') ? "is-invalid" : "" }}" value="{{ $data->proposal_revision_date }}" placeholder="Revision Proposal Date" name="proposal_revision_date" required>
+                                        <input type="date" class="form-control {{ $errors->has('proposal_revision_date') ? "is-invalid" : "" }}" value="{{ $data->proposal_revision_date->format('Y-m-d') }}" placeholder="Revision Proposal Date" name="proposal_revision_date" required>
                                         <label for="proposal_revision_date">Tanggal Revisi Proposal *</label>
                                     </div>
 
@@ -113,7 +113,7 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-floating mb-3">
-                                        <input type="date" class="form-control {{ $errors->has('final_project_date') ? "is-invalid" : "" }}" value="{{ $data->final_project_date }}" placeholder="Final Project Date" name="final_project_date" required>
+                                        <input type="date" class="form-control {{ $errors->has('final_project_date') ? "is-invalid" : "" }}" value="{{ $data->final_project_date->format('Y-m-d') }}" placeholder="Final Project Date" name="final_project_date" required>
                                         <label for="final_project_date">Tanggal TA *</label>
 
                                         @if ($errors->has('final_project_date'))
